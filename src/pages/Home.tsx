@@ -180,8 +180,13 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <img
+              {/* <img
                 src="https://www.financialexpress.com/wp-content/uploads/2022/05/Nexcharge-1.jpg"
+                alt="Battery recycling facility"
+                className="rounded-2xl shadow-2xl"
+              /> */}
+              <img
+                src="../public/assets/img/2.png"
                 alt="Battery recycling facility"
                 className="rounded-2xl shadow-2xl"
               />

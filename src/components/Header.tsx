@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Recycling Process', path: '/recycling-process' },
+    { name: 'Blackmass Recycling', path: '/recycling-process' },
     { name: 'Supply Chain', path: '/supply-chain' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Articles', path: '/articles' },

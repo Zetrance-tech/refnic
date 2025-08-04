@@ -98,7 +98,57 @@ const Gallery: React.FC = () => {
       category: "materials",
       title: "Plastic Components",
       description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 13,
+      src: "../public/assets/img/1.png",
+      category: "plants",
+      title: "Plant Machinery",
+      description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 14,
+      src: "../public/assets/img/2.png",
+      category: "plants",
+      title: "Plant Machinery",
+      description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 15,
+      src: "../public/assets/img/3.png",
+      category: "plants",
+      title: "Plant Machinery",
+      description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 16,
+      src: "../public/assets/img/4.png",
+      category: "plants",
+      title: "Plant Machinery",
+      description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 17,
+      src: "../public/assets/img/5.png",
+      category: "plants",
+      title: "Plant Machinery",
+      description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 18,
+      src: "../public/assets/img/6.png",
+      category: "plants",
+      title: "Plant Machinery",
+      description: "Separated plastic materials for recycling"
+    },
+      {
+      id: 19,
+      src: "../public/assets/img/7.jpg",
+      category: "materials",
+      title: "Blackmass Output",
+      description: "Separated plastic materials for recycling"
     }
+    
   ];
 
   const filteredImages = selectedCategory === 'all' 

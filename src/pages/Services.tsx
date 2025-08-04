@@ -27,7 +27,7 @@ const Services: React.FC = () => {
         "Training and support",
         "Maintenance services"
       ],
-      image: "https://www.hydro.com/globalassets/07-media/news/2022/05-may/hydrovolt-opening.jpg?quality=85&width=1036&rmode=crop&rsampler=bicubic&rxy=0.5,0.5&compand=true"
+      image: "../public/assets/img/4.png"
     },
     {
       icon: <Shield className="h-12 w-12" />,
@@ -79,7 +79,7 @@ const Services: React.FC = () => {
         "Pricing strategies",
         "Partnership facilitation"
       ],
-      image: "https://www.smart-academy.in/wp-content/uploads/2024/10/Blog-Image-Cold-Chain-Logistics.jpg"
+      image: "../public/assets/img/8.png"
     },
     {
       icon: <Settings className="h-12 w-12" />,
@@ -92,7 +92,7 @@ const Services: React.FC = () => {
         "Technology upgrades",
         "Performance monitoring"
       ],
-      image: "https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=800"
+      image: "../public/assets/img/9.png"
     }
   ];
 
