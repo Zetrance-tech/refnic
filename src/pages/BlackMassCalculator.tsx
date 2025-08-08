@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const BlackMassCalculator: React.FC = () => {
-  const [commodities, setCommodities] = useState([
+  const [commodities] = useState([
     { name: 'Cobalt', value: 32965, percent: 0, payable: 0 },
     { name: 'Nickel', value: 14840, percent: 0, payable: 0 },
     { name: 'Lithium', value: 10440, percent: 0, payable: 0 },
@@ -9,24 +9,28 @@ const BlackMassCalculator: React.FC = () => {
     { name: 'Copper', value: 8500, percent: 0, payable: 0 },
   ]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedCommodity, setSelectedCommodity] = useState(commodities[0]);
   const [currency, setCurrency] = useState<keyof typeof exchangeRates>('USD');
   const exchangeRates = {
     USD: 1,
-    INR: 83.5,
+    INR: 87.5,
     RNB: 7.25,
   };
 
-  const handleInputChange = (index: number, field: string, value: number) => {
-    const newCommodities = [...commodities];
-    newCommodities[index] = { ...newCommodities[index], [field]: value };
-    setCommodities(newCommodities);
+  const handleSelectChange = (commodityName: string) => {
+    const commodity = commodities.find(c => c.name === commodityName);
+    if (commodity) {
+      setSelectedCommodity(commodity);
+    }
+  };
+
+  const handleSelectedCommodityChange = (field: string, value: number) => {
+    setSelectedCommodity({ ...selectedCommodity, [field]: value });
   };
 
   const calculatePrice = () => {
-    const total = commodities.reduce((acc, commodity) => {
-      const commodityPrice = commodity.value * (commodity.percent / 100) * (commodity.payable / 100);
-      return acc + commodityPrice;
-    }, 0);
+    const { value, percent, payable } = selectedCommodity;
+    const total = value * (percent / 100) * (payable / 100);
     setTotalPrice(total);
   };
 
@@ -48,44 +52,55 @@ const BlackMassCalculator: React.FC = () => {
 
       <div className="container mx-auto p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6 font-semibold text-gray-700">
-            <div className="md:col-span-1">Commodity</div>
-            <div>Value (USD)</div>
-            <div>Percent (%)</div>
-            <div>Payable (%)</div>
+          <div className="mb-6">
+            <label htmlFor="commodity-select" className="block text-lg font-medium text-gray-700 mb-2">
+              Select a Mineral
+            </label>
+            <select
+              id="commodity-select"
+              value={selectedCommodity.name}
+              onChange={(e) => handleSelectChange(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg"
+            >
+              {commodities.map((c) => (
+                <option key={c.name} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {commodities.map((commodity, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center mb-4">
-              <div className="font-bold text-lg text-gray-800">{commodity.name}</div>
-              <div>
-                <input
-                  type="number"
-                  value={commodity.value}
-                  onChange={(e) => handleInputChange(index, 'value', parseFloat(e.target.value) || 0)}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                />
-              </div>
-              <div>
-                <input
-                  type="number"
-                  placeholder="e.g., 15"
-                  value={commodity.percent || ''}
-                  onChange={(e) => handleInputChange(index, 'percent', parseFloat(e.target.value) || 0)}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                />
-              </div>
-              <div>
-                <input
-                  type="number"
-                  placeholder="e.g., 80"
-                  value={commodity.payable || ''}
-                  onChange={(e) => handleInputChange(index, 'payable', parseFloat(e.target.value) || 0)}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center mb-4">
+            <div>
+              <label className="font-bold text-lg text-gray-800">Value (USD)</label>
+              <input
+                type="number"
+                value={selectedCommodity.value}
+                onChange={(e) => handleSelectedCommodityChange('value', parseFloat(e.target.value) || 0)}
+                className="w-full p-2 border border-gray-300 rounded-lg mt-1"
+              />
             </div>
-          ))}
+            <div>
+              <label className="font-bold text-lg text-gray-800">Percent (%)</label>
+              <input
+                type="number"
+                placeholder="e.g., 15"
+                value={selectedCommodity.percent || ''}
+                onChange={(e) => handleSelectedCommodityChange('percent', parseFloat(e.target.value) || 0)}
+                className="w-full p-2 border border-gray-300 rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <label className="font-bold text-lg text-gray-800">Payable (%)</label>
+              <input
+                type="number"
+                placeholder="e.g., 80"
+                value={selectedCommodity.payable || ''}
+                onChange={(e) => handleSelectedCommodityChange('payable', parseFloat(e.target.value) || 0)}
+                className="w-full p-2 border border-gray-300 rounded-lg mt-1"
+              />
+            </div>
+          </div>
 
           <div className="flex justify-center items-center mt-8 space-x-4">
             <button
@@ -107,7 +122,7 @@ const BlackMassCalculator: React.FC = () => {
 
           {totalPrice > 0 && (
             <div className="mt-10 text-center">
-              <h3 className="text-2xl font-semibold text-gray-800">Total Calculated Value</h3>
+              <h3 className="text-2xl font-semibold text-gray-800">Total Calculated Value (Per Ton)</h3>
               <p className="text-5xl font-bold text-green-600 mt-2">
                 {currency === 'USD' && '$'}
                 {currency === 'INR' && '₹'}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, Phone, Gem, TrendingUp, LogIn } from 'lucide-react';
+import { Menu, X, Phone, Gem, TrendingUp, LogIn, Calculator } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
             <span className="hidden lg:inline">Metal Prices</span>
           </Link>
           <Link to="/black-mass-calculator" className="flex items-center gap-1 hover:text-green-600 transition">
-            <Gem className="w-4 h-4" />
+            <Calculator className="w-4 h-4" />
             <span className="hidden lg:inline">Black Mass Calculator</span>
           </Link>
           <Link to="/login" className="flex items-center gap-1 hover:text-green-600 transition">
