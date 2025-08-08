@@ -10,6 +10,10 @@ import Gallery from './pages/Gallery';
 import Articles from './pages/Articles';
 import ArticleDetail from './pages/ArticleDetail';
 import Contact from './pages/Contact';
+import Trade from './pages/Trade';
+import Pricing from './pages/Pricing';
+import BlackMassCalculator from './pages/BlackMassCalculator';
+import LoginPage from './pages/Login';
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
             <Route path="/articles" element={<Articles />} />
             <Route path="/articles/:slug" element={<ArticleDetail />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/trade" element={<Trade />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/black-mass-calculator" element={<BlackMassCalculator />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </main>
         <Footer />

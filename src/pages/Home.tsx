@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -14,7 +14,9 @@ import {
   Globe
 } from 'lucide-react';
 
+
 const Home: React.FC = () => {
+   const [showModal, setShowModal] = useState(false);
   const services = [
     {
       icon: <Battery className="h-8 w-8" />,
@@ -77,13 +79,13 @@ const Home: React.FC = () => {
     {
       name: "",
       company: "",
-      text: "Outstanding support in government licensing. REFNIC's team is knowledgeable and reliable.",
+      text: "Outstanding support in government licensing. Refnic's team is knowledgeable and reliable.",
       image: "https://media.istockphoto.com/id/1336230140/photo/portrait-of-a-happy-mature-man-of-indian-ethnicity.jpg?s=612x612&w=0&k=20&c=TNFicavabSAoGlBtx0RaQxPObIX-O50CCGLO-dvuaD8="
     }
   ];
 
   return (
-    <div className="pt-16 lg:pt-20">
+    <div className="pt-20 lg:pt-30">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-blue-900 to-purple-900">
@@ -92,7 +94,7 @@ const Home: React.FC = () => {
         
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(120)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-2 h-2 bg-green-400/30 rounded-full"
@@ -105,7 +107,7 @@ const Home: React.FC = () => {
                 opacity: [0.3, 1, 0.3],
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: 5 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 2,
               }}
@@ -121,26 +123,30 @@ const Home: React.FC = () => {
             className="max-w-4xl mx-auto"
           >
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6">
-              Powering Sustainability
+              Recycle Lithium Batteries.
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                Through Innovation
+                 Buy/Sell Critical Minerals.
               </span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-200 mb-8 leading-relaxed">
-              India's pioneer in lithium-ion battery recycling, offering complete turnkey solutions and expert consulting services for a sustainable future.
+             Strategic Lithium Recycling Advice. Seamless Critical Mineral Market.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
               >
-                <span>Book Free Consultation</span>
+                <span>Buy/Sell Minerals</span>
                 <ArrowRight className="h-5 w-5" />
               </Link>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-200 flex items-center justify-center space-x-2">
+            
+              <button  onClick={() => setShowModal(true)} className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-200 flex items-center justify-center space-x-2">
                 <Play className="h-5 w-5" />
-                <span>Watch Demo</span>
+                <span>Watch Lithium Recycling</span>
               </button>
+              
+              
+              
             </div>
           </motion.div>
         </div>
@@ -155,6 +161,122 @@ const Home: React.FC = () => {
           </div>
         </motion.div>
       </section>
+
+       {/* Modal Popup for YouTube */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-3xl w-full relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-2 right-2 text-gray-700 hover:text-red-500 text-2xl font-bold"
+            >
+              ×
+            </button>
+            <div className="w-full aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/dyDoOcBMAHw?si=jSSgOEk7QP446YpA"
+                title="YouTube demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+         )}
+
+
+
+         {/* Buy/Sell */}
+    <section className="py-20 bg-gray-50">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="text-center mb-16"
+    >
+      <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+        Lithium Battery Commodities
+      </h2>
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        Buying and selling lithium battery commodities on the go.
+      </p>
+    </motion.div>
+
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+      {[
+         {
+          name: 'Black Mass',
+          image: 'https://li-cycle.com/wp-content/uploads/2020/10/Black-Mass.png'
+        },
+        {
+          name: 'Lithium Carbonate',
+          image: 'https://p.globalsources.com/IMAGES/PDT/S1219852479/lithium-carbonates.png?ver=6049240701'
+        },
+        {
+          name: 'Lithium Hydroxide',
+          image: 'https://p.globalsources.com/IMAGES/PDT/S1219852479/lithium-carbonates.png?ver=6049240701'
+        },
+        {
+          name: 'Cobalt Sulphate',
+          image: 'https://cdn.globalso.com/zhuoerchem/Uafecca657b084026b52806b14d2954dfJ.jpg'
+        },
+       
+        {
+          name: 'Scrap batteries',
+          image: 'https://5.imimg.com/data5/SELLER/Default/2024/3/397849396/WU/YH/UB/1744396/rechargeable-lithium-battery.png'
+        },
+        {
+          name: 'Nickel Sulphate',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNr2uoMpjXRpnAKVWObxAD0_EvrpT_bldnpA&s'
+        }
+      ].map((commodity, index) => (
+        <motion.div
+          key={commodity.name}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          viewport={{ once: true }}
+          className="bg-white p-4 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300"
+        >
+          <img
+            src={commodity.image}
+            alt={commodity.name}
+            className="w-20 h-20 object-cover rounded-full mx-auto mb-4"
+          />
+          <h3 className="text-md font-semibold text-gray-900 mb-4">
+            {commodity.name}
+          </h3>
+          <div className="flex justify-center gap-2">
+            <button className="px-4 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600 transition-all">
+              Buy
+            </button>
+            <button className="px-4 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-all">
+              Sell
+            </button>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+  <br></br>
+  
+   <div className="flex justify-center mt-6">
+      <Link
+       to="/contact"
+       className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
+       >
+       <span>More Minerals</span>
+       <ArrowRight className="h-4 w-4" />
+      </Link>
+   </div>
+</section>
+
+
 
       {/* About Section */}
       <section className="py-20 bg-white">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 
 const RecyclingProcess: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
   const processSteps = [
     {
       id: "01",
@@ -86,7 +87,7 @@ const RecyclingProcess: React.FC = () => {
       name: "Blackmass",
       description: "Contains lithium, cobalt, nickel, manganese",
       purity: "99.5%",
-      usage: "New battery manufacturing",
+      usage: "Mineral Extraction",
       color: "from-gray-700 to-gray-900"
     },
     {
@@ -98,16 +99,16 @@ const RecyclingProcess: React.FC = () => {
     },
     {
       name: "Aluminum",
-      description: "Lightweight structural materials",
+      description: "Lightweight structural materials and making alloys",
       purity: "99.7%",
       usage: "Automotive & aerospace",
       color: "from-gray-300 to-gray-500"
     },
     {
       name: "Plastic",
-      description: "Various polymer materials",
+      description: "Various polymer materials for making plastic composites",
       purity: "98%",
-      usage: "Manufacturing & packaging",
+      usage: "Manufacturing, packaging",
       color: "from-blue-500 to-purple-600"
     }
   ];
@@ -159,13 +160,38 @@ const RecyclingProcess: React.FC = () => {
             <p className="text-xl sm:text-2xl text-gray-200 mb-8 leading-relaxed">
               State-of-the-art technology and processes that maximize material recovery while minimizing environmental impact.
             </p>
-            <button className="bg-white text-green-600 px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-200 inline-flex items-center space-x-2">
+            <button onClick={() => setShowModal(true)} className="bg-white text-green-600 px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-200 inline-flex items-center space-x-2">
               <Play className="h-5 w-5" />
               <span>Watch Process Video</span>
             </button>
           </motion.div>
         </div>
       </section>
+
+      {/* Modal Popup for YouTube */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-3xl w-full relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-2 right-2 text-gray-700 hover:text-red-500 text-2xl font-bold"
+            >
+              ×
+            </button>
+            <div className="w-full aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/dyDoOcBMAHw?si=jSSgOEk7QP446YpA"
+                title="YouTube demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+         )}
 
       {/* Process Steps */}
       <section className="py-20 bg-white">
