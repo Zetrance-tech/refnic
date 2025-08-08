@@ -133,7 +133,7 @@ const Home: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/contact"
+                to="/trade"
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 <span>Buy/Sell Minerals</span>
@@ -251,13 +251,12 @@ const Home: React.FC = () => {
           <h3 className="text-md font-semibold text-gray-900 mb-4">
             {commodity.name}
           </h3>
-          <div className="flex justify-center gap-2">
-            <button className="px-4 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600 transition-all">
-              Buy
-            </button>
-            <button className="px-4 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-all">
-              Sell
-            </button>
+          <div className="flex justify-center">
+            <Link to="/trade">
+              <button className="px-4 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600 transition-all">
+                Buy / Sell
+              </button>
+            </Link>
           </div>
         </motion.div>
       ))}
@@ -267,7 +266,7 @@ const Home: React.FC = () => {
   
    <div className="flex justify-center mt-6">
       <Link
-       to="/contact"
+       to="/trade"
        className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
        >
        <span>More Minerals</span>

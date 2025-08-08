@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[500] bg-white shadow-md">
+    <div className="fixed top-0 left-0 right-0 z-[500] bg-white/80 backdrop-blur-md shadow-md">
       {/* Top Mini Header Bar */}
       <div className="text-gray-800 text-[15px] font-medium tracking-wide px-4 py-2 flex justify-between items-center sm:px-6 lg:px-8 border-b border-gray-200">
         {/* content on the left */}
