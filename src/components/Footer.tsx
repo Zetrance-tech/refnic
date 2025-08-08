@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2 text-sm">
                 <Phone className="h-4 w-4 text-green-400 flex-shrink-0" />
-                <span className="text-gray-300">+91-89200-89962</span>
+                <span className="text-gray-300">+91-7417-333-936</span>
               </div>
               <div className="flex items-center space-x-2 text-sm">
                 <Mail className="h-4 w-4 text-green-400 flex-shrink-0" />
@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 REFNIC. All rights reserved. | Powering Sustainability Through Innovation
+            © 2025 Refnic. All rights reserved. | Powering Sustainability Through Innovation
           </p>
         </div>
       </div>
