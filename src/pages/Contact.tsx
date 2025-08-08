@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
       details: [
-        "+91-89200-89962",
+        "+91-7417-333-936",
         "",
         "Mon-Fri: 9AM-5PM IST"
       ]
@@ -62,9 +62,7 @@ const Contact: React.FC = () => {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
       details: [
-        "info@refnic.com",
-        "sales@refnic.com",
-        "support@refnic.com"
+        "hello@refnic.com",
       ]
     },
     {

@@ -20,29 +20,29 @@ const Header: React.FC = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-[500] bg-white/80 backdrop-blur-md shadow-md">
       {/* Top Mini Header Bar */}
-      <div className="text-gray-800 text-[15px] font-medium tracking-wide px-4 py-2 flex justify-between items-center sm:px-6 lg:px-8 border-b border-gray-200">
+      <div className="hidden sm:flex text-gray-800 text-[12px] sm:text-[15px] font-medium tracking-wide px-4 py-2 justify-between items-center sm:px-6 lg:px-8 border-b border-gray-200">
         {/* content on the left */}
         <Link to="/" className="flex items-center space-x-2">
           
         </Link>
 
         {/* Right-side links with icons */}
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-2 sm:gap-6 items-center">
           <Link to="/trade" className="flex items-center gap-1 hover:text-green-600 transition">
             <Gem className="w-4 h-4" />
-            <span>Buy/Sell Minerals</span>
+            <span className="hidden lg:inline">Buy/Sell Minerals</span>
           </Link>
           <Link to="/pricing" className="flex items-center gap-1 hover:text-green-600 transition">
             <TrendingUp className="w-4 h-4" />
-            <span>Metal Prices</span>
+            <span className="hidden lg:inline">Metal Prices</span>
           </Link>
           <Link to="/black-mass-calculator" className="flex items-center gap-1 hover:text-green-600 transition">
             <Gem className="w-4 h-4" />
-            <span>Black Mass Calculator</span>
+            <span className="hidden lg:inline">Black Mass Calculator</span>
           </Link>
           <Link to="/login" className="flex items-center gap-1 hover:text-green-600 transition">
             <LogIn className="w-4 h-4" />
-            <span>Login</span>
+            <span className="hidden lg:inline">Login</span>
           </Link>
         </div>
       </div>
