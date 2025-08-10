@@ -54,7 +54,7 @@ const BlackMassCalculator: React.FC = () => {
         <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
           <div className="mb-6">
             <label htmlFor="commodity-select" className="block text-lg font-medium text-gray-700 mb-2">
-              Select a Mineral
+              Select a Base Mineral
             </label>
             <select
               id="commodity-select"

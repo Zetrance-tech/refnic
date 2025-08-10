@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useNavigate } from 'react-router-dom';
 
 const Pricing: React.FC = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [currency, setCurrency] = useState('USD');
 
@@ -286,6 +288,14 @@ const Pricing: React.FC = () => {
                     <Line type="monotone" dataKey="uv" stroke="#8884d8" activeDot={{ r: 8 }} />
                   </LineChart>
                 </ResponsiveContainer>
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={() => navigate('/trade')}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-full"
+                  >
+                    Buy/Sell
+                  </button>
+                </div>
             </div>
             ))}
         </div>

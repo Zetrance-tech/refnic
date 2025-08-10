@@ -1,13 +1,74 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Trade: React.FC = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<'buy' | 'sell' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    contact: '',
+    email: '',
+    company: '',
+    location: '',
+    mineral: '',
+    quantity: '',
+  });
 
-  const openModal = (type: 'buy' | 'sell') => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwyS538D-5c69FIrufTsSYknokmmA2ctH6LktkDctKgqIWps0Hq_mgz_lmcWCfIpS6H/exec';
+    
+    const values = [
+      new Date().toLocaleString(),
+      modalType,
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.company,
+      formData.location,
+      formData.mineral,
+      formData.quantity,
+    ];
+
+    try {
+      await fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify({ values }),
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        mode: 'no-cors'
+      });
+      alert('Form submitted successfully!');
+      closeModal();
+    } catch (error) {
+      console.error('Error!', error);
+      alert('There was an error submitting the form.');
+    }
+  };
+
+  const openModal = (type: 'buy' | 'sell', mineral: string) => {
     setModalType(type);
     setShowModal(true);
+    setFormData({
+      name: '',
+      contact: '',
+      email: '',
+      company: '',
+      location: '',
+      quantity: '',
+      mineral: mineral,
+    });
   };
 
   const closeModal = () => {
@@ -16,25 +77,25 @@ const Trade: React.FC = () => {
   };
 
   const commodities = [
-    'Lithium carbonate',
-    'Lithium hydro-oxide',
-    'Cobalt cathode metal',
-    'Cobalt Sulphate',
-    'Nickel Cathode Metal',
-    'Nickel sulphate',
-    'Nickel Carbonate',
-    'Manganese sulphate powder',
-    'Manganese sulphate Solution',
-    'Black mass',
-    'Copper',
-    'Aluminum',
-    'Iron',
-    'Plastic (PPE, PE)',
-    'Second life cells',
+    { name: 'Lithium carbonate', location: 'North India', price: '₹5,00,000/ton' },
+    { name: 'Lithium hydro-oxide', location: 'South India', price: '₹5,50,000/ton' },
+    { name: 'Cobalt cathode metal', location: 'North India', price: '₹2,00,000/ton' },
+    { name: 'Cobalt Sulphate', location: 'South India', price: '₹2,20,000/ton' },
+    { name: 'Nickel Cathode Metal', location: 'North India', price: '₹1,50,000/ton' },
+    { name: 'Nickel sulphate', location: 'South India', price: '₹1,60,000/ton' },
+    { name: 'Nickel Carbonate', location: 'North India', price: '₹1,70,000/ton' },
+    { name: 'Manganese sulphate powder', location: 'South India', price: '₹80,000/ton' },
+    { name: 'Manganese sulphate Solution', location: 'South India', price: '₹85,000/ton' },
+    { name: 'Black mass', location: 'North India', price: '₹1,20,000/ton' },
+    { name: 'Copper', location: 'South India', price: '₹7,00,000/ton' },
+    { name: 'Aluminum', location: 'West India', price: '₹2,00,000/ton' },
+    { name: 'Iron', location: 'East India', price: '₹40,000/ton' },
+    { name: 'Plastic (PPE, PE)', location: 'West India', price: '₹50,000/ton' },
+    { name: 'Second life cells', location: 'North India', price: '₹3,00,000/ton' },
   ];
 
   const filteredCommodities = commodities.filter((item) =>
-    item.toLowerCase().includes(searchQuery.toLowerCase())
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -71,38 +132,45 @@ const Trade: React.FC = () => {
         </div>
 
         <div className="mt-12">
-            <h2 className="text-2xl font-bold mb-6 text-center">Commodities We Trade</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-2xl font-bold mb-6 text-center">Commodities We Trade</h2>
+          <div className="space-y-4">
             {filteredCommodities.map((item, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <img src="/assets/img/10.png" alt={item} className="w-full h-32 object-cover"/>
-                <div className="p-4">
-                    <p className="text-base font-semibold text-gray-800 mb-3">{item}</p>
-                    <div className="flex justify-between">
-                    <button
-                        onClick={() => openModal('buy')}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Buy
-                    </button>
-                    <button
-                        onClick={() => openModal('sell')}
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Sell
-                    </button>
-                    </div>
+              <div key={index} className="bg-white rounded-lg shadow-lg p-4 flex flex-col sm:flex-row justify-between items-center">
+                <div className="flex-1 mb-4 sm:mb-0">
+                  <p className="text-lg font-semibold text-gray-800">{item.name}</p>
+                  <p className="text-sm text-gray-600">{item.location}</p>
+                  <p className="text-md font-bold text-gray-800">{item.price}</p>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => openModal('buy', item.name)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Buy
+                  </button>
+                  <button
+                    onClick={() => openModal('sell', item.name)}
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Sell
+                  </button>
+                  <button onClick={() => navigate('/pricing')} className="text-gray-500 hover:text-gray-700 p-2">
+                    <i className="fas fa-chart-line fa-lg"></i>
+                  </button>
+                  <a href={`https://wa.me/+91-7417333936?text=Hi,%20I%20am%20interested%20in%20${item.name}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-700 p-2">
+                    <i className="fab fa-whatsapp fa-lg"></i>
+                  </a>
                 </div>
+              </div>
             ))}
-            </div>
+          </div>
         </div>
 
         {showModal && (
             <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-[600]">
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
                 <h2 className="text-2xl font-bold mb-4">{modalType === 'buy' ? 'Buy Mineral' : 'Sell Mineral'}</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -113,6 +181,8 @@ const Trade: React.FC = () => {
                         id="name"
                         type="text"
                         placeholder="Your Name"
+                        value={formData.name}
+                        onChange={handleInputChange}
                     />
                     </div>
                     <div className="mb-4">
@@ -124,6 +194,8 @@ const Trade: React.FC = () => {
                         id="contact"
                         type="text"
                         placeholder="Contact Number"
+                        value={formData.contact}
+                        onChange={handleInputChange}
                     />
                     </div>
                     <div className="mb-4">
@@ -135,6 +207,8 @@ const Trade: React.FC = () => {
                         id="email"
                         type="email"
                         placeholder="Your Email"
+                        value={formData.email}
+                        onChange={handleInputChange}
                     />
                     </div>
                     <div className="mb-4">
@@ -146,6 +220,8 @@ const Trade: React.FC = () => {
                         id="company"
                         type="text"
                         placeholder="Company Name"
+                        value={formData.company}
+                        onChange={handleInputChange}
                     />
                     </div>
                     <div className="mb-4">
@@ -157,6 +233,8 @@ const Trade: React.FC = () => {
                         id="location"
                         type="text"
                         placeholder="Location"
+                        value={formData.location}
+                        onChange={handleInputChange}
                     />
                     </div>
                     <div className="mb-4">
@@ -166,10 +244,12 @@ const Trade: React.FC = () => {
                     <select
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="mineral"
+                        value={formData.mineral}
+                        onChange={handleInputChange}
                     >
                         {commodities.map((mineral) => (
-                        <option key={mineral} value={mineral}>
-                            {mineral}
+                        <option key={mineral.name} value={mineral.name}>
+                            {mineral.name}
                         </option>
                         ))}
                     </select>
@@ -183,13 +263,15 @@ const Trade: React.FC = () => {
                         id="quantity"
                         type="number"
                         placeholder="Quantity"
+                        value={formData.quantity}
+                        onChange={handleInputChange}
                     />
                     </div>
                 </div>
                 <div className="flex items-center justify-between mt-4">
                     <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="button"
+                    type="submit"
                     >
                     Submit
                     </button>
