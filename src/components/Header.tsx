@@ -76,13 +76,15 @@ const Header: React.FC = () => {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                to="/contact"
+              <a
+                href="https://wa.me/+91-7417333936?text=Hi,%20I%20would%20like%20to%20get%20a%20quote."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200 flex items-center space-x-2"
               >
                 <Phone className="h-4 w-4" />
                 <span>Get Quote</span>
-              </Link>
+              </a>
             </nav>
 
             {/* Mobile menu button */}

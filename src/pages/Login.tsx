@@ -5,16 +5,16 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 pt-32 pb-12">
-      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl w-full">
+      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl w-full" style={{ maxHeight: '80vh' }}>
         {/* Left side with image */}
         <div className="w-full md:w-1/2 hidden md:block">
-          <img src="/assets/main1.jpg" alt="Renewable Energy" className="object-cover h-full w-full" />
+          <img src="/assets/img/11.png" alt="Renewable Energy" className="object-cover h-full w-full" />
         </div>
 
         {/* Right side with form */}
-        <div className="w-full md:w-1/2 p-8">
+        <div className="w-full md:w-1/2 p-8 flex flex-col">
           {isSignUp ? (
-            <div>
+            <div className="overflow-y-auto">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Create an Account</h2>
               <p className="text-gray-600 mb-8">Get started with a free account.</p>
               <form>
@@ -91,7 +91,7 @@ const LoginPage: React.FC = () => {
               </form>
             </div>
           ) : (
-            <div>
+            <div className="flex-1 flex flex-col justify-center">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome Back</h2>
               <p className="text-gray-600 mb-8">Please sign in to your account.</p>
               <form>

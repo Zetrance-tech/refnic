@@ -88,33 +88,19 @@ const Home: React.FC = () => {
     <div className="pt-20 lg:pt-30">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-blue-900 to-purple-900">
-          <div className="absolute inset-0 bg-black/20"></div>
-        </div>
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          {[...Array(120)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-green-400/30 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.3, 1, 0.3],
-              }}
-              transition={{
-                duration: 5 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
-
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
+        >
+          <source
+            src="../public/assets/video/video-plant.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
