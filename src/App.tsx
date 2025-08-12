@@ -14,6 +14,8 @@ import Trade from './pages/Trade';
 import Pricing from './pages/Pricing';
 import BlackMassCalculator from './pages/BlackMassCalculator';
 import LoginPage from './pages/Login';
+import LithiumIonBatteryRecycling from './pages/LithiumIonBatteryRecycling';
+import HydrometPage from './pages/Hydromet';
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/black-mass-calculator" element={<BlackMassCalculator />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/hydromet" element={<HydrometPage />} />
           </Routes>
         </main>
         <Footer />

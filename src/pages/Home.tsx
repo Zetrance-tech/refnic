@@ -11,7 +11,9 @@ import {
   CheckCircle,
   Lightbulb,
   Shield,
-  Globe
+  Globe,
+  ClipboardCheck,
+  Sprout,
 } from 'lucide-react';
 
 
@@ -197,7 +199,7 @@ const Home: React.FC = () => {
       {[
          {
           name: 'Black Mass',
-          image: 'https://li-cycle.com/wp-content/uploads/2020/10/Black-Mass.png'
+          image: 'https://5.imimg.com/data5/SELLER/Default/2025/5/509613085/DQ/TB/ZO/186156999/lithium-battery-recycling-nmc-black-mass.jpg'
         },
         {
           name: 'Lithium Carbonate',
@@ -262,85 +264,7 @@ const Home: React.FC = () => {
 </section>
 
 
-
-      {/* About Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-             About Us            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We are at the forefront of sustainable energy solutions, specializing in lithium-ion battery recycling technology and comprehensive consulting services that help businesses achieve environmental compliance while maximizing resource recovery.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              {/* <img
-                src="https://www.financialexpress.com/wp-content/uploads/2022/05/Nexcharge-1.jpg"
-                alt="Battery recycling facility"
-                className="rounded-2xl shadow-2xl"
-              /> */}
-              <img
-                src="../public/assets/img/2.png"
-                alt="Battery recycling facility"
-                className="rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="bg-green-100 p-3 rounded-lg">
-                  <Globe className="h-6 w-6 text-green-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Pan-India Operations</h3>
-                  <p className="text-gray-600">Serving clients across all major cities and industrial hubs in India with localized expertise.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 p-3 rounded-lg">
-                  <Lightbulb className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Innovation Driven</h3>
-                  <p className="text-gray-600">Cutting-edge technology and processes that maximize recovery rates and minimize environmental impact.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-purple-100 p-3 rounded-lg">
-                  <Users className="h-6 w-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Team</h3>
-                  <p className="text-gray-600">Industry veterans with decades of combined experience in recycling and environmental compliance.</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
+ {/* Services Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -378,6 +302,147 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+
+      {/* About Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+             Closing the sustainablity Loop   </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Turning Spent Lithium Batteries into Tomorrow’s Critical Minerals. <br></br>We are at the forefront of sustainable energy solutions, specializing in lithium-ion battery recycling technology and comprehensive consulting services that help businesses achieve environmental compliance while maximizing resource recovery.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              {/* <img
+                src="https://www.financialexpress.com/wp-content/uploads/2022/05/Nexcharge-1.jpg"
+                alt="Battery recycling facility"
+                className="rounded-2xl shadow-2xl"
+              /> */}
+              <img
+                src="../public/assets/img/refnic-plant-3.png"
+                alt="Battery recycling facility"
+                className="rounded-2xl shadow-2xl"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="bg-green-100 p-3 rounded-lg">
+                  <Globe className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Pan-Globe Operations</h3>
+                  <p className="text-gray-600">Serving clients across all over the globe and industrial with expertise technology.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-blue-100 p-3 rounded-lg">
+                  <Lightbulb className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Innovation Driven</h3>
+                  <p className="text-gray-600">Cutting-edge technology and processes that maximize recovery rates and minimize environmental impact.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-purple-100 p-3 rounded-lg">
+                  <Users className="h-6 w-6 text-purple-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Team</h3>
+                  <p className="text-gray-600">Industry veterans with decades of combined experience in recycling and environmental compliance.</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+           
+           <br></br>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="bg-green-100 p-3 rounded-lg">
+                  <ClipboardCheck className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">EPR Compliance Excellence</h3>
+                  <p className="text-gray-600">Comprehensive Extended Producer Responsibility solutions to help businesses meet regulatory
+          mandates while enhancing sustainability credentials.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-blue-100 p-3 rounded-lg">
+                  <Sprout className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Carbon Credit Optimization</h3>
+                  <p className="text-gray-600">Advanced methodologies to generate, manage, and trade carbon credits for maximum
+          environmental and financial impact.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-purple-100 p-3 rounded-lg">
+                  <Shield className="h-6 w-6 text-purple-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Critical Mineral Security</h3>
+                  <p className="text-gray-600">Strategic sourcing and recycling initiatives to secure essential minerals for
+          clean energy technologies and supply chain resilience.</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src="../public/assets/img/2.png"
+                alt="Battery recycling facility"
+                className="rounded-2xl shadow-2xl"
+              />
+            </motion.div>
+          </div>
+
+        </div>
+      </section>
+
+     
 
       {/* Recycling Process Overview */}
       <section className="py-20 bg-white">

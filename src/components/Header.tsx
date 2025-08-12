@@ -1,19 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, Phone, Gem, TrendingUp, LogIn, Calculator } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isRecyclingOpen, setIsRecyclingOpen] = useState(false);
+  const [isMediaOpen, setIsMediaOpen] = useState(false);
   const location = useLocation();
+  const recyclingRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (recyclingRef.current && !recyclingRef.current.contains(event.target as Node)) {
+        setIsRecyclingOpen(false);
+      }
+      if (mediaRef.current && !mediaRef.current.contains(event.target as Node)) {
+        setIsMediaOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [recyclingRef, mediaRef]);
 
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Blackmass Recycling', path: '/recycling-process' },
+    { 
+      name: 'Lithium Recycling', 
+      dropdown: [
+        { name: 'Blackmass Recycling', path: '/recycling-process' },
+        { name: 'Hydrometallurgical Process', path: '/hydromet' },
+      ] 
+    },
     { name: 'Supply Chain', path: '/supply-chain' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'News', path: '/articles' },
+    { 
+      name: 'Media', 
+      dropdown: [
+        { name: 'Gallery', path: '/gallery' },
+        { name: 'News', path: '/articles' },
+      ] 
+    },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -64,26 +95,70 @@ const Header: React.FC = () => {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-10">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`text-sm font-medium transition-colors duration-200 hover:text-green-600 ${
-                    location.pathname === item.path
-                      ? 'text-green-600 border-b-2 border-green-600'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                item.dropdown ? (
+                  <div key={item.name} className="relative" ref={item.name === 'Lithium Recycling' ? recyclingRef : mediaRef}>
+                    <button
+                      onClick={() => {
+                        if (item.name === 'Lithium Recycling') {
+                          setIsRecyclingOpen(!isRecyclingOpen);
+                        } else {
+                          setIsMediaOpen(!isMediaOpen);
+                        }
+                      }}
+                      className={`text-sm font-medium transition-colors duration-200 hover:text-green-600 flex items-center ${
+                        item.dropdown.some(subItem => location.pathname === subItem.path)
+                          ? 'text-green-600 border-b-2 border-green-600'
+                          : 'text-gray-700'
+                      }`}
+                    >
+                      {item.name}
+                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    {((item.name === 'Lithium Recycling' && isRecyclingOpen) || (item.name === 'Media' && isMediaOpen)) && (
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-md shadow-lg">
+                        <div className="py-1">
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.path}
+                              to={subItem.path}
+                              onClick={() => {
+                                if (item.name === 'Lithium Recycling') {
+                                  setIsRecyclingOpen(false);
+                                } else {
+                                  setIsMediaOpen(false);
+                                }
+                              }}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.path}
+                    to={item.path || ''}
+                    className={`text-sm font-medium transition-colors duration-200 hover:text-green-600 ${
+                      location.pathname === item.path
+                        ? 'text-green-600 border-b-2 border-green-600'
+                        : 'text-gray-700'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <a
-                href="https://wa.me/+91-7417333936?text=Hi,%20I%20would%20like%20to%20get%20a%20quote."
+                href="https://wa.me/+91-7417333936?text=Hi,%20I%20would%20like%20to%20become%20a%20Partner."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200 flex items-center space-x-2"
               >
                 <Phone className="h-4 w-4" />
-                <span>Get Quote</span>
+                <span>Become a Partner</span>
               </a>
             </nav>
 
@@ -105,18 +180,38 @@ const Header: React.FC = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                    location.pathname === item.path
-                      ? 'text-green-600 bg-green-50'
-                      : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                item.dropdown ? (
+                  <div key={item.name}>
+                    <p className="block px-3 py-2 rounded-md text-base font-medium text-gray-500">{item.name}</p>
+                    {item.dropdown.map(subItem => (
+                      <Link
+                        key={subItem.path}
+                        to={subItem.path}
+                        onClick={() => setIsOpen(false)}
+                        className={`block pl-6 pr-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                          location.pathname === subItem.path
+                            ? 'text-green-600 bg-green-50'
+                            : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
+                        }`}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                      location.pathname === item.path
+                        ? 'text-green-600 bg-green-50'
+                        : 'text-gray-700 hover:text-green-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </div>
           </motion.div>

@@ -17,10 +17,10 @@ const Trade: React.FC = () => {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { id, value } = e.target;
+    const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value,
+      [name]: value,
     }));
   };
 
@@ -28,27 +28,22 @@ const Trade: React.FC = () => {
     e.preventDefault();
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyS538D-5c69FIrufTsSYknokmmA2ctH6LktkDctKgqIWps0Hq_mgz_lmcWCfIpS6H/exec';
     
-    const values = [
-      new Date().toLocaleString(),
-      modalType,
-      formData.name,
-      formData.contact,
-      formData.email,
-      formData.company,
-      formData.location,
-      formData.mineral,
-      formData.quantity,
-    ];
+    const data = {
+      timestamp: new Date().toLocaleString(),
+      type: modalType || '',
+      ...formData,
+    };
 
     try {
       await fetch(scriptURL, {
         method: 'POST',
-        body: JSON.stringify({ values }),
         headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
+          'Content-Type': 'application/json',
         },
-        mode: 'no-cors'
+        body: JSON.stringify(data),
+        mode: 'no-cors',
       });
+      
       alert('Form submitted successfully!');
       closeModal();
     } catch (error) {
@@ -179,6 +174,7 @@ const Trade: React.FC = () => {
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="name"
+                        name="name"
                         type="text"
                         placeholder="Your Name"
                         value={formData.name}
@@ -192,6 +188,7 @@ const Trade: React.FC = () => {
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="contact"
+                        name="contact"
                         type="text"
                         placeholder="Contact Number"
                         value={formData.contact}
@@ -205,6 +202,7 @@ const Trade: React.FC = () => {
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="Your Email"
                         value={formData.email}
@@ -218,6 +216,7 @@ const Trade: React.FC = () => {
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="company"
+                        name="company"
                         type="text"
                         placeholder="Company Name"
                         value={formData.company}
@@ -231,6 +230,7 @@ const Trade: React.FC = () => {
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="location"
+                        name="location"
                         type="text"
                         placeholder="Location"
                         value={formData.location}
@@ -244,6 +244,7 @@ const Trade: React.FC = () => {
                     <select
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="mineral"
+                        name="mineral"
                         value={formData.mineral}
                         onChange={handleInputChange}
                     >
@@ -261,6 +262,7 @@ const Trade: React.FC = () => {
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="quantity"
+                        name="quantity"
                         type="number"
                         placeholder="Quantity"
                         value={formData.quantity}
