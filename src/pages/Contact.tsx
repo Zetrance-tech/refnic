@@ -346,7 +346,7 @@ const Contact: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-6">Find Us</h2>
-            <p className="text-xl text-gray-600">Located in the heart of Noida's business district</p>
+            <p className="text-xl text-gray-600">Located in the heart of Delhi NCR</p>
           </motion.div>
 
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -354,7 +354,7 @@ const Contact: React.FC = () => {
               <div className="text-center">
                 <MapPin className="h-16 w-16 text-green-600 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Interactive Map</h3>
-                <p className="text-gray-600">REFNIC Office - Mumbai, Maharashtra</p>
+                <p className="text-gray-600">Refnic Office - Noida, Uttar Pradesh</p>
                 <button className="mt-4 bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200">
                   Get Directions
                 </button>

@@ -97,7 +97,7 @@ const Home: React.FC = () => {
           className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
         >
           <source
-            src="../public/assets/video/video-plant.mp4"
+            src="../public/assets/video/video.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.

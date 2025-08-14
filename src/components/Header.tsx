@@ -7,9 +7,11 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isRecyclingOpen, setIsRecyclingOpen] = useState(false);
   const [isMediaOpen, setIsMediaOpen] = useState(false);
+  const [isCriticalMineralsOpen, setIsCriticalMineralsOpen] = useState(false);
   const location = useLocation();
   const recyclingRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
+  const criticalMineralsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -19,13 +21,16 @@ const Header: React.FC = () => {
       if (mediaRef.current && !mediaRef.current.contains(event.target as Node)) {
         setIsMediaOpen(false);
       }
+      if (criticalMineralsRef.current && !criticalMineralsRef.current.contains(event.target as Node)) {
+        setIsCriticalMineralsOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [recyclingRef, mediaRef]);
+  }, [recyclingRef, mediaRef, criticalMineralsRef]);
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -37,7 +42,16 @@ const Header: React.FC = () => {
         { name: 'Hydrometallurgical Process', path: '/hydromet' },
       ] 
     },
-    { name: 'Supply Chain', path: '/supply-chain' },
+    { 
+      name: 'Critical Minerals', 
+      dropdown: [
+        { name: 'Supply Chain', path: '/Supply-Chain' },
+        { name: 'Buy/Sell Minerals', path: '/Trade' },
+        { name: 'Metal Prices', path: '/Pricng' },
+        { name: 'Black Mass Price Calculator', path: '/black-mass-calculator' },
+      ] 
+    },
+   
     { 
       name: 'Media', 
       dropdown: [
@@ -96,11 +110,13 @@ const Header: React.FC = () => {
             <nav className="hidden lg:flex items-center space-x-10">
               {navItems.map((item) => (
                 item.dropdown ? (
-                  <div key={item.name} className="relative" ref={item.name === 'Lithium Recycling' ? recyclingRef : mediaRef}>
+                  <div key={item.name} className="relative" ref={item.name === 'Lithium Recycling' ? recyclingRef : item.name === 'Critical Minerals' ? criticalMineralsRef : mediaRef}>
                     <button
                       onClick={() => {
                         if (item.name === 'Lithium Recycling') {
                           setIsRecyclingOpen(!isRecyclingOpen);
+                        } else if (item.name === 'Critical Minerals') {
+                          setIsCriticalMineralsOpen(!isCriticalMineralsOpen);
                         } else {
                           setIsMediaOpen(!isMediaOpen);
                         }
@@ -114,7 +130,7 @@ const Header: React.FC = () => {
                       {item.name}
                       <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    {((item.name === 'Lithium Recycling' && isRecyclingOpen) || (item.name === 'Media' && isMediaOpen)) && (
+                    {((item.name === 'Lithium Recycling' && isRecyclingOpen) || (item.name === 'Critical Minerals' && isCriticalMineralsOpen) || (item.name === 'Media' && isMediaOpen)) && (
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-md shadow-lg">
                         <div className="py-1">
                           {item.dropdown.map((subItem) => (
@@ -124,6 +140,8 @@ const Header: React.FC = () => {
                               onClick={() => {
                                 if (item.name === 'Lithium Recycling') {
                                   setIsRecyclingOpen(false);
+                                } else if (item.name === 'Critical Minerals') {
+                                  setIsCriticalMineralsOpen(false);
                                 } else {
                                   setIsMediaOpen(false);
                                 }
@@ -152,7 +170,7 @@ const Header: React.FC = () => {
                 )
               ))}
               <a
-                href="https://wa.me/+91-7417333936?text=Hi,%20I%20would%20like%20to%20become%20a%20Partner."
+                href="https://wa.me/+917417333936?text=Hi,%20I%20would%20like%20to%20become%20a%20Partner."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200 flex items-center space-x-2"

@@ -14,7 +14,6 @@ import Trade from './pages/Trade';
 import Pricing from './pages/Pricing';
 import BlackMassCalculator from './pages/BlackMassCalculator';
 import LoginPage from './pages/Login';
-import LithiumIonBatteryRecycling from './pages/LithiumIonBatteryRecycling';
 import HydrometPage from './pages/Hydromet';
 
 function App() {
