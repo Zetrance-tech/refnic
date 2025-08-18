@@ -47,7 +47,7 @@ const Header: React.FC = () => {
       dropdown: [
         { name: 'Supply Chain', path: '/Supply-Chain' },
         { name: 'Buy/Sell Minerals', path: '/Trade' },
-        { name: 'Metal Prices', path: '/Pricng' },
+        { name: 'Metal Prices', path: '/Pricing' },
         { name: 'Black Mass Price Calculator', path: '/black-mass-calculator' },
       ] 
     },
