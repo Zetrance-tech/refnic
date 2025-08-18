@@ -97,7 +97,7 @@ const Home: React.FC = () => {
           className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
         >
           <source
-            src="../public/assets/video/video.mp4"
+            src="/assets/video/video.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -303,6 +303,84 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Responsible Recycling Section */}
+      <section className="py-20 bg-gradient-to-r from-gray-900 to-blue-900 text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center">
+              Responsible recycling services pay off
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto text-center">
+              We don’t just raise the bar in recycling—we go beyond expectations. That’s why leading OEMs trust us with their recycling.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img src="/assets/img/15.png" alt="Guidance" className="w-full h-48 object-cover"/>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Expert Guidance</h3>
+                <p className="text-lg text-center">Comprehensive services for recycling process - maximum convenience, safety, and value for your materials.</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img src="/assets/img/14.png" alt="Ownership" className="w-full h-48 object-cover"/>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Material Custody</h3>
+                <p className="text-lg text-center">Full responsibility for your materials, ensuring a seamless and secure transfer.</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img src="/assets/img/16.png" alt="Security" className="w-full h-48 object-cover"/>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Enhanced Security</h3>
+                <p className="text- text-center">Our operations are backed by stringent controls, continuous monitoring, a documented chain of custody.</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img src="/assets/img/18.png" alt="Destruction" className="w-full h-48 object-cover"/>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Secure Disposal</h3>
+                <p className="text-lg text-center">We guarantee the safe confidentiality of any proprietary data.</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
 
       {/* About Section */}
       <section className="py-20 bg-white">
@@ -334,7 +412,7 @@ const Home: React.FC = () => {
                 className="rounded-2xl shadow-2xl"
               /> */}
               <img
-                src="../public/assets/img/refnic-plant-3.png"
+                src="/assets/img/refnic-plant-3.png"
                 alt="Battery recycling facility"
                 className="rounded-2xl shadow-2xl"
               />
@@ -432,7 +510,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
             >
               <img
-                src="../public/assets/img/2.png"
+                src="/assets/img/mineral-bags-3.png"
                 alt="Battery recycling facility"
                 className="rounded-2xl shadow-2xl"
               />
@@ -550,7 +628,7 @@ const Home: React.FC = () => {
               className="relative"
             >
               <img
-                src="https://mms.businesswire.com/media/20220215005160/en/1358675/4/graphite.jpg?download=1"
+                src="/assets/img/bm-bottle.png"
                 alt="Blackmass material"
                 className="rounded-2xl shadow-2xl"
               />

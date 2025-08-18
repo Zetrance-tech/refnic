@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://refnic.com/sitemap.xml
+
+# SEO-optimized crawling
+Crawl-delay: 1
+
+# Allow indexing of articles
+Allow: /articles/
+Allow: /services/
+Allow: /recycling-process/
+Allow: /supply-chain/
+Allow: /gallery/
+Allow: /contact/

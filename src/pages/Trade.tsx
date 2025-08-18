@@ -6,6 +6,7 @@ const Trade: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<'buy' | 'sell' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
   const [formData, setFormData] = useState({
     name: '',
     contact: '',
@@ -26,7 +27,8 @@ const Trade: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwyS538D-5c69FIrufTsSYknokmmA2ctH6LktkDctKgqIWps0Hq_mgz_lmcWCfIpS6H/exec';
+    // IMPORTANT: Replace this with your deployed Google Apps Script Web App URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzAxEmyEm_3IU9nNmFFnggmv_7wSQMSPWJ4cSgB88JxlhTlpHmJrfaT3krx-XxWaTa3/exec';
     
     const data = {
       timestamp: new Date().toLocaleString(),
@@ -134,9 +136,23 @@ const Trade: React.FC = () => {
                 <div className="flex-1 mb-4 sm:mb-0">
                   <p className="text-lg font-semibold text-gray-800">{item.name}</p>
                   <p className="text-sm text-gray-600">{item.location}</p>
-                  <p className="text-md font-bold text-gray-800">{item.price}</p>
+                  {isLoggedIn ? (
+                    <p className="text-md font-bold text-gray-800">{item.price}</p>
+                  ) : (
+                    <p className="text-md font-bold text-gray-800">
+                      ₹<span className="blur-sm">X,XX,XXX</span>/ton
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center space-x-2">
+                  {!isLoggedIn && (
+                    <button
+                      onClick={() => navigate('/login')}
+                      className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Login to View Prices
+                    </button>
+                  )}
                   <button
                     onClick={() => openModal('buy', item.name)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

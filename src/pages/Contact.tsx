@@ -33,10 +33,39 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    // IMPORTANT: Replace this with your deployed Google Apps Script Web App URL for the contact form
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxqTUin4ZxNe-LIplcpRLk7mPS6OE6TJFDc4G7gT16OpQc9bF3HoHwwURjqF2wIpMOq/exec';
+
+    const data = {
+      timestamp: new Date().toLocaleString(),
+      ...formData,
+    };
+
+    try {
+      await fetch(scriptURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        mode: 'no-cors',
+      });
+      
+      alert('Contact form submitted successfully!');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error!', error);
+      alert('There was an error submitting the contact form.');
+    }
   };
 
   const contactInfo = [
