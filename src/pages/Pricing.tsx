@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,6 +6,14 @@ const Pricing: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [currency, setCurrency] = useState('USD');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
+
+  useEffect(() => {
+    // Simulate login status check
+    // In a real application, you would check a token or user session
+    const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(userLoggedIn);
+  }, []);
 
   const conversionRates = {
     USD: 1,
@@ -272,29 +280,57 @@ const Pricing: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredMinerals.map((mineral, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md relative">
                 <h2 className="text-xl font-bold mb-2">{mineral.name}</h2>
-                <p className="text-2xl font-semibold text-gray-800 mb-4">
-                  {getCurrencySymbol(currency)}
-                  {(mineral.price * conversionRates[currency as keyof typeof conversionRates]).toLocaleString()}
-                </p>
-                <ResponsiveContainer width="100%" height={200}>
-                  <LineChart data={mineral.data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="uv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                  </LineChart>
-                </ResponsiveContainer>
+                {!isLoggedIn ? (
+                  <div className="relative">
+                    <p className="text-2xl font-semibold text-gray-800 mb-4">
+                      {getCurrencySymbol(currency)}
+                      <span className="blur-sm">
+                        {(mineral.price * conversionRates[currency as keyof typeof conversionRates]).toLocaleString()}
+                      </span>
+                    </p>
+                    <ResponsiveContainer width="100%" height={200} className="blur-sm">
+                      <LineChart data={mineral.data}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="uv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 rounded-lg">
+                      <p className="text-lg font-semibold text-gray-700 mb-4 text-center">
+                        Sign in to view pricing and trend
+                      </p>
+                      <button
+                        onClick={() => navigate('/login')}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full"
+                      >
+                        Sign In
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-2xl font-semibold text-gray-800 mb-4">
+                      {getCurrencySymbol(currency)}
+                      {(mineral.price * conversionRates[currency as keyof typeof conversionRates]).toLocaleString()}
+                    </p>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <LineChart data={mineral.data}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="uv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </>
+                )}
                 <div className="flex justify-center mt-4">
-                  <button
-                    onClick={() => navigate('/trade')}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-full"
-                  >
-                    Buy/Sell
-                  </button>
                 </div>
             </div>
             ))}
